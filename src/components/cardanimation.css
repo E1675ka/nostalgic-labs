@@ -1,0 +1,35 @@
+/* CardAnimation.css */
+.card-container {
+    width: 100%;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide anything outside the container */
+    position: relative;
+  }
+  
+  .card {
+    background-color: #4CAF50; /* Card color */
+    color: white;
+    font-size: 1.5rem;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    animation: moveCard 5s linear infinite; /* Apply the animation */
+  }
+  
+  /* Keyframes for moving the card from right to left */
+  @keyframes moveCard {
+    0% {
+      transform: translateX(100%); /* Start from right outside the container */
+    }
+    50% {
+      transform: translateX(-50%); /* Move to the center of the screen */
+    }
+    100% {
+      transform: translateX(-100%); /* End on the left outside the container */
+    }
+  }
+  
