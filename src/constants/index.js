@@ -10,6 +10,8 @@ import {
   github,
   webgif,
   graphic,
+  seo,
+  sw,
 } from "../assets";
 export const navLinks = [
   {
@@ -29,55 +31,63 @@ export const services = [
   {
     title: "Web development",
     animationData:webgif,
-    description:'Crafting sleeek and responsive websites for modern businesses.'
+    description:'Crafting sleeek and responsive websites for modern businesses.',
+    // tech:technologies,    
   },
   {
     title: "Graphic Design",
     animationData: graphic,
-    description:"Innovative and captivating designs to define your brand Identity"
+    description:"Innovative and captivating designs to define your brand Identity.",
+  
   },
 
   {
-    title: "Create",
-    icon: git,
+    title: "SEO & Digital Marketing",
+    animationData:seo,
+    description:'Strategies that amplify your online presence and connect you with your audience.',
+  },
+  {
+    title: "Software Development",
+    animationData:sw,
+    description:'Custom Software solution tailored to your unique needs'
   },
 ];
 // testimonials
-export const technologies = [
-  {
-    name: "nodejs",
-    icon: nodejs,
-  },
-  {
-    name: "threeJs",
-    icon: threejs,
-  },
+// export const technologies = [
+//   {
+//     name: "nodejs",
+//     icon: nodejs,
+//   },
+//   {
+//     name: "threeJs",
+//     icon: threejs,
+//   },
 
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-];
+//   {
+//     name: "React JS",
+//     icon: reactjs,
+//   },
+//   {
+//     name: "Tailwind CSS",
+//     icon: tailwind,
+//   },
+//   {
+//     name: "MongoDB",
+//     icon: mongodb,
+//   },
+//   {
+//     name: "git",
+//     icon: git,
+//   },
+//   {
+//     name: "Redux Toolkit",
+//     icon: redux,
+//   },
+//   {
+//     name: "JavaScript",
+//     icon: javascript,
+//   },
+// ];
 export const projects = [
   {
     name: "Clone Cloud Hosting site",
@@ -151,26 +161,11 @@ export const projects = [
   export const testimonials = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/8.jpg",
+      "Partner with us for tailored digital solution that reflect your brand's uniqueness and deliver measurable results.",
+    // name: "Sara Lee",
+    // designation: "CFO",
+    // company: "Acme Co",
+    // image: "https://randomuser.me/api/portraits/women/8.jpg",
   },
-  {
-    testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
-    name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
-  },
+  
 ];

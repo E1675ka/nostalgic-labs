@@ -12,5 +12,6 @@ import redux from "./redux.png";
 import github from "./github.png";
 import webgif from "./webgif.json";
 import graphic from "./graphic.json";
-
-export {graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };
+import seo from "./seo.json";
+import sw from "./sw.json";
+export {sw,seo,graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };

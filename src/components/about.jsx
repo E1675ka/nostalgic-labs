@@ -26,7 +26,7 @@ const ServiceCard = ({ index, title, animationData,description }) => (
         <h3 className="text-white text-[20px] font-bold text-center">
           {title}
         </h3>
-        <p className={`${styles.sectionSubText}flex text-center p-3 text-[2px}`}>{description}</p>
+        <p className={`text-slate-400 md:text-[12px] flex text-center p-3 ${styles.sectionSubText}`}>{description}</p>
       </div>
     </motion.div>
   </Tilt>
@@ -50,7 +50,7 @@ const About = () => {
         unparalleled creativity
       </motion.p>
       <StarsCanvas />
-      <motion.p className={styles.sectionHeadText}>Our Expertise</motion.p>
+      <motion.p className={`${styles.sectionHeadText} mt-6`} >Our Expertise</motion.p>
       <div className="mt-20 flex flex-wrap gap-10">
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
