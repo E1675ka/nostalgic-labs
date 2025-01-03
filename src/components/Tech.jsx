@@ -3,7 +3,7 @@ import React from "react";
 import '../../src/index.css'; 
 import { BallCanvas, StarsCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
-// import { technologies } from "../constants";
+import { technologies } from "../constants";
 
 const Tech = () => {
   return (
@@ -13,7 +13,7 @@ const Tech = () => {
           <div
             key={technology.name}
             className="w-28 h-28 tech-item"
-            style={{ '--index': index }} // Dynamically assign the index for animation delay
+            style={{ '--index': index }} 
           >
             <BallCanvas icon={technology.icon} />
           </div>

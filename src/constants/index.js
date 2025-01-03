@@ -52,42 +52,42 @@ export const services = [
     description:'Custom Software solution tailored to your unique needs'
   },
 ];
-// testimonials
-// export const technologies = [
-//   {
-//     name: "nodejs",
-//     icon: nodejs,
-//   },
-//   {
-//     name: "threeJs",
-//     icon: threejs,
-//   },
 
-//   {
-//     name: "React JS",
-//     icon: reactjs,
-//   },
-//   {
-//     name: "Tailwind CSS",
-//     icon: tailwind,
-//   },
-//   {
-//     name: "MongoDB",
-//     icon: mongodb,
-//   },
-//   {
-//     name: "git",
-//     icon: git,
-//   },
-//   {
-//     name: "Redux Toolkit",
-//     icon: redux,
-//   },
-//   {
-//     name: "JavaScript",
-//     icon: javascript,
-//   },
-// ];
+export const technologies = [
+  {
+    name: "nodejs",
+    icon: nodejs,
+  },
+  {
+    name: "threeJs",
+    icon: threejs,
+  },
+
+  {
+    name: "React JS",
+    icon: reactjs,
+  },
+  {
+    name: "Tailwind CSS",
+    icon: tailwind,
+  },
+  {
+    name: "MongoDB",
+    icon: mongodb,
+  },
+  {
+    name: "git",
+    icon: git,
+  },
+  {
+    name: "Redux Toolkit",
+    icon: redux,
+  },
+  {
+    name: "JavaScript",
+    icon: javascript,
+  },
+];
 export const projects = [
   {
     name: "Clone Cloud Hosting site",

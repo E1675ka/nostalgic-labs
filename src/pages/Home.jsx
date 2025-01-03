@@ -24,6 +24,8 @@ export default function Home() {
   {/* <Tech/>
   <Works/> */}
   <Feedback/>
+{/* <Tech/>  */}
+  <Works/>
 <Help/>
       </div>
       
