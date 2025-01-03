@@ -19,18 +19,8 @@ const ProjectCard = ({
   highlightText,
 }) => {
   return (
-    <motion.div
-      className="w-full" // Ensure the width is set for animation to work smoothly
-      initial={{ x: "0%" }}
-      animate={{
-        x: ["0%", "20%", "0%"], // Define the horizontal movement
-      }}
-      transition={{
-        repeat: Infinity, // Infinite loop
-        repeatType: "loop", // Loop the animation
-        duration: 4, // Complete one cycle in 4 seconds
-        ease: "easeInOut", // Smooth transition
-      }}
+    <div
+     
     >
       <Tilt
         options={{
@@ -44,7 +34,7 @@ const ProjectCard = ({
           {highlightText}
         </motion.p>
       </Tilt>
-    </motion.div>
+    </div>
   );
 };
 
@@ -66,16 +56,16 @@ const Works = () => {
       </div>
 
       <motion.div 
-       initial={{ x: "-1000%" }}
+       initial={{ x: "0%" }}
       animate={{
-        x: ["0%", "20%", "0%"], // Define the horizontal movement
+        x:["0%","-10%","-20%", "-40%", "-60%", "-80%", "-100%", "-120%", "-140%"], // Define the horizontal movement
       }}
       transition={{
         repeat: Infinity, // Infinite loop
         repeatType: "loop", // Loop the animation
-        duration: 4, // Complete one cycle in 4 seconds
+        duration: 10, // Complete one cycle in 4 seconds
         ease: "easeInOut", // Smooth transition
-      }} className="mt-20 flex flex-wrap gap-7">
+      }} className="mt-20 flex  w-full gap-7">
         {keyHighlights.map((highlight, index) => (
           <ProjectCard 
             key={highlight} 
