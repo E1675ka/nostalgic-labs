@@ -7,10 +7,10 @@ import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const keyHighlights = [
-  "Innovation", 
-  "Transparency", 
-  "Client-Centric Approach", 
-  "End-to-End Support", 
+  "Innovation",
+  "Transparency",
+  "Client-Centric Approach",
+  "End-to-End Support",
   "Call-to-Action Section"
 ];
 
@@ -20,7 +20,7 @@ const ProjectCard = ({
 }) => {
   return (
     <div
-     
+
     >
       <Tilt
         options={{
@@ -55,25 +55,27 @@ const Works = () => {
         </motion.p>
       </div>
 
-      <motion.div 
-       initial={{ x: "0%" }}
-      animate={{
-        x:["0%","-10%","-20%", "-40%", "-60%", "-80%", "-100%", "-120%", "-140%"], // Define the horizontal movement
-      }}
-      transition={{
-        repeat: Infinity, // Infinite loop
-        repeatType: "loop", // Loop the animation
-        duration: 10, // Complete one cycle in 4 seconds
-        ease: "easeInOut", // Smooth transition
-      }} className="mt-20 flex  w-full gap-7">
+      <motion.div
+        initial={{ x: "100%" }} // Start the animation from the left (off-screen)
+        animate={{
+          x: ["150%", "-400%"], // Animate from left (-100%) to right (100%)
+        }}
+        transition={{
+          repeat: Infinity, // Infinite loop
+          duration: 40, // Duration for one cycle
+          ease: "linear", // Smooth, constant speed
+        }}
+        className="mt-20 flex w-full gap-7"
+      >
         {keyHighlights.map((highlight, index) => (
-          <ProjectCard 
-            key={highlight} 
-            index={index} 
-            highlightText={highlight} 
+          <ProjectCard
+            key={highlight}
+            index={index}
+            highlightText={highlight}
           />
         ))}
       </motion.div>
+
     </>
   );
 };
