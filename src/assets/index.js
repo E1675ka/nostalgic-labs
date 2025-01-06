@@ -14,4 +14,10 @@ import webgif from "./webgif.json";
 import graphic from "./graphic.json";
 import seo from "./seo.json";
 import sw from "./sw.json";
-export {sw,seo,graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };
+import cta from "./cta.json";
+import innovation from "./innovation.json";
+import transparency from "./transparency.json";
+import clienttrust from "./clienttrust.json";
+import clientSupport from "./client-support-anim.json";
+import mainScene from "./main-Scene.json"
+export {mainScene,clienttrust,clientSupport,transparency,innovation,cta,sw,seo,graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };

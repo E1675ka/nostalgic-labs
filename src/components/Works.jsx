@@ -1,10 +1,11 @@
 import React from "react";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
-
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
+import { mainScene,clienttrust, clientSupport, transparency, innovation, cta } from "../assets/index";
+import Lottie from "react-lottie"
 
 const keyHighlights = [
   "Innovation",
@@ -14,25 +15,41 @@ const keyHighlights = [
   "Call-to-Action Section"
 ];
 
+const imgi = [
+  innovation,transparency, clientSupport,mainScene, clienttrust,  cta
+];
+
 const ProjectCard = ({
   index,
   highlightText,
+  animationData, // Fix: Pass img prop for each card
 }) => {
-  return (
-    <div
+  const defaultOptions ={
+    loop:true,
+    autoplay:true,
+    animationData,
+    rendererSettings:{
+      preserveAspectRatio:"xMidYMid slice",
+    },
+  };
 
-    >
+  return (
+    <div>
       <Tilt
         options={{
           max: 45,
           scale: 1,
           speed: 450,
         }}
-        className="bg-violet-900 p-5 rounded-2xl sm:w-[360px] w-full"
+        className="bg-tertiary relative rounded-[20px] shadow-card flex items-center flex-col p-5  sm:w-[360px] w-full"
       >
-        <motion.p className="text-white text-lg font-semibold">
+        <motion.p className={` absolute bottom-20 z-10 text-[27px] font-bold  text-slate-900  flex justify-center font-semibold}`}>
           {highlightText}
         </motion.p>
+
+        <div className="rounded-md">
+          <Lottie options={defaultOptions} height={200} width={200} />
+        </div>
       </Tilt>
     </div>
   );
@@ -58,7 +75,7 @@ const Works = () => {
       <motion.div
         initial={{ x: "100%" }} // Start the animation from the left (off-screen)
         animate={{
-          x: ["150%", "-400%"], // Animate from left (-100%) to right (100%)
+          x: ["100%", "-100%"], // Animate from left (-100%) to right (400%)
         }}
         transition={{
           repeat: Infinity, // Infinite loop
@@ -72,10 +89,10 @@ const Works = () => {
             key={highlight}
             index={index}
             highlightText={highlight}
+            animationData={imgi[index]} // Fix: Pass the corresponding image from the imgi array
           />
         ))}
       </motion.div>
-
     </>
   );
 };

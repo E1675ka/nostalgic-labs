@@ -4,11 +4,9 @@ import Calendar from "react-calendar";
 import CalendarComponent from "../components/calender";
 import DateComponent from "../components/Date";
 import About from "../components/about";
-import CardAnimation from "../components/card";
 import { styles } from "../styles";
 import React, { useEffect, useState } from "react";
 import ServiceCard from "../components/ServiceCard";
-import Tech from "../components/Tech";
 import Works from "../components/Works";
 import Feedback from "../components/Feedback";
 export default function Home() {
