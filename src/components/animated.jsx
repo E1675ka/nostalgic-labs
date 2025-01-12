@@ -24,7 +24,7 @@ function AnimatedText() {
     <div className="w-400px flex gap-4">
       {/* Render the current word with animation */}
       <animated.h1
-        className="text-2xl font-bold text-purple-500"
+        className="text-2xl font-bold text-purple-500 sm:text-[16px]"
         style={springProps}
       >
         {text[index]}

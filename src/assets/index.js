@@ -20,4 +20,5 @@ import transparency from "./transparency.json";
 import clienttrust from "./clienttrust.json";
 import clientSupport from "./client-support-anim.json";
 import mainScene from "./main-Scene.json"
-export {mainScene,clienttrust,clientSupport,transparency,innovation,cta,sw,seo,graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };
+import Nlogo from "./NlLogo.png"
+export {Nlogo,mainScene,clienttrust,clientSupport,transparency,innovation,cta,sw,seo,graphic,webgif,github,redux,nostalgicLogo, menu, close,nodejs,reactjs,threejs,mongodb,javascript,git,tailwind };

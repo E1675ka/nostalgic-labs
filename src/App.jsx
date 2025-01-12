@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Hero, Navbar } from "./components";
-import { Help, InternetPlans } from "./pages";
+import {  Navbar } from "./components";
+import {Services,About,Careers } from "./pages";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 
@@ -37,19 +37,20 @@ const App = () => {
   return (
     <>
       <Router>
-        <div className="relative z-0 bg-slate-900/10">
-          <div className=" bg-cover  w-full m-2  z-10 flex justify-center bg-no-repeat  bg-center">
+        <div className="relative z-0 bg-white  ">
+          <div className=" w-full   z-10 flex justify-center">
             <Navbar />
           </div>  
-          <div className="relative z-1 bg-slate-00 h-screen">
+          <div className="relative  bg-slate-100">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/help" element={<Help />} />
-              <Route path="/internetPlans" element={<InternetPlans />} />
+              <Route path="/About" element={<About />} />
+              <Route path="/Careers" element={<Careers />} />
+              <Route path="/Services" element={<Services />} />
             </Routes>
           </div>
           {showFooter && (
-            <div className="bg-slate-950 fixed bottom-0 w-screen p-2 mt-2  ">
+            <div className=" fixed bottom-0 w-screen p-2 mt-2  ">
               <Footer />
             </div>
           )}

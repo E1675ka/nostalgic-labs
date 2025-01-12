@@ -12,7 +12,7 @@ import QAndA from "../components/QAndA";
 
 // template_jicbddf
 // service_asu9acr
-const Help = () => {
+const About = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
     name: "",
@@ -158,4 +158,4 @@ const Help = () => {
   );
 };
 
-export default SectionWrapper(Help, "help");
+export default SectionWrapper(About, "About");

@@ -14,16 +14,17 @@ export const navLinks = [
     id: "Services",
     title: "Services",
   },
-  {
-    id: "Contact",
-    title: "Contact",
+ {
+    id: "Careers",
+    title: "Careers",
   },
+
 ];
 export const services = [
   {
     title: "Web development",
     animationData:webgif,
-    description:'Crafting sleeek and responsive websites for modern businesses.',
+    description:'Crafting sleek and responsive websites for modern businesses.',
     
   },
   {
@@ -49,8 +50,7 @@ export const services = [
   export const testimonials = [
   {
     testimonial:
-      "Partner with us for tailored digital solution that reflect your brand's uniqueness and deliver measurable results.",
-
+      "CTA button"
   },
   
 ];

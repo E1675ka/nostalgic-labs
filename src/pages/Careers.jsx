@@ -3,23 +3,9 @@ import React, { useState, useEffect } from "react";
 import { SectionWrapper } from "../hoc";
 import StarsCanvas from "../components/canvas/Stars";
 
-const InternetPlans = () => {
+const Careers = () => {
   const internetPlanData = [
-    { id: 1, title: "500MBS 1HR", description: "5/=" },
-    { id: 2, title: "1HR UNLIMITED", description: "10/=" },
-    { id: 3, title: "500MBS DAILY", description: "11/=" },
-    { id: 4, title: "1GB DAILY", description: "15/=" },
-    { id: 5, title: "2GB DAILY", description: "25/=" },
-    { id: 6, title: "4HRS UNLIMITED", description: "30/=" },
-    { id: 7, title: "2GB WEEKLY", description: "49/=" },
-    { id: 8, title: "FAST 24HR UNLIMITED", description: "50/=" },
-    { id: 9, title: "ULTRA FAST 24HR UNLIMITED", description: "80/=" },
-    { id: 10, title: "5GB WEEKLY", description: "100/=" },
-    { id: 11, title: "FAST WEEKLY UNLIMITED", description: "200/=" },
-    { id: 12, title: "ULTRA FAST WEEKLY UNLIMITED", description: "300/=" },
-    { id: 13, title: "FAST MONTHLY UNLIMITED", description: "800/=" },
-    { id: 14, title: "ULTRA FAST MONTHLY UNLIMITED", description: "1000/=" },
-  ];
+ ];
   const Cards = ({ title, description }) => {
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -82,7 +68,7 @@ const InternetPlans = () => {
     <>
       <StarsCanvas />
       <h1 className="flex justify-center font-semibold text-xl my-2 mt-2  ">
-        Our Internet Plans
+ Careers
       </h1>
       <div className="flex flex-row mb-14 md:grid-cols-2 justify-center ">
         <ul className="grid grid-cols-3  gap-6  cursor-pointer justify-center mr-4 mb-8">
@@ -97,4 +83,4 @@ const InternetPlans = () => {
   );
 };
 
-export default SectionWrapper(InternetPlans, "internetPlans");
+export default SectionWrapper(Careers, "Careers");
