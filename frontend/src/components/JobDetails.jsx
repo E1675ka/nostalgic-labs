@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { useParams } from "react-router-dom";
 import { CareerInfo } from "../constants/index"; // Ensure this is the correct path to your data
 import { SectionWrapper } from "../hoc";
 import JobApplicationForm from "./jobAppForm";
-
+import ViewApplications from "./AppliedInfo";
 const JobDetailsPage = () => {
   const { JobId } = useParams(); // Get the JobId from the URL
   // console.log("JobId from URL:", JobId);
@@ -63,6 +63,8 @@ const JobDetailsPage = () => {
         </section>
       </div>
       <JobApplicationForm />
+
+      <ViewApplications />
     </div>
   );
 };
