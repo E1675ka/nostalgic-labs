@@ -7,4 +7,9 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 3000, // Set the warning limit to 1000 kB
   },
+  server: {
+    mimeTypes: {
+      ".js": "application/javascript",
+    },
+  },
 });
