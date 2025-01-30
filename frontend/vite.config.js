@@ -8,8 +8,3 @@ export default defineConfig({
     chunkSizeWarningLimit: 3000, // Set the warning limit to 1000 kB
   },
 });
-// export default {
-//   build: {
-//     chunkSizeWarningLimit: 1000, // Set the warning limit to 1000 kB
-//   },
-// };
