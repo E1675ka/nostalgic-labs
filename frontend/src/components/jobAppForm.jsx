@@ -54,10 +54,13 @@ const JobApplicationForm = () => {
     formDataToSend.append("resume", formData.resume); // Append file
 
     try {
-      const response = await fetch("http://localhost:5000/api/jobs/apply", {
-        method: "POST",
-        body: formDataToSend,
-      });
+      const response = await fetch(
+      `${import.meta.env.VITE_API_BASE_URL/api/jobs/apply}`,
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
 
       const result = await response.json();
       alert(result.message);
