@@ -23,9 +23,11 @@ app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
+        // Allow same-origin & Postman requests (origin undefined)
         callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS"));
+        console.log(`❌ CORS Blocked: ${origin}`);
+        return callback(new Error("CORS Not Allowed"), false);
       }
     },
     methods: "GET,POST,PUT,DELETE",
