@@ -15,6 +15,8 @@ const SignUp = ({ setIsUserSignedUp }) => {
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -139,10 +141,12 @@ const SignUp = ({ setIsUserSignedUp }) => {
 
         <button
           type="submit"
-          className="w-full bg-purple-600 text-white p-3 rounded-md hover:bg-purple-700 transition duration-200"
+          className={`w-full p-3 rounded-md text-white ${
+            loading ? "bg-gray-500 cursor-not-allowed" : "bg-purple-600"
+          }`}
+          disabled={loading}
         >
-          Sign Up
-        </button>
+          {loading ? "Signing In..." : "Sign In"}
       </form>
 
       <div className="flex gap-2 my-2">
