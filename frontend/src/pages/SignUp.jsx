@@ -77,7 +77,7 @@ const SignUp = ({ setIsUserSignedUp }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/users/signup`,
+        `${apiUrl}/api/users/signup`,
         formData
       );
 

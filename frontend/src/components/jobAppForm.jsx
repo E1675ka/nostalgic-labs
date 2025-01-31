@@ -54,13 +54,10 @@ const JobApplicationForm = () => {
     formDataToSend.append("resume", formData.resume); // Append file
 
     try {
-      const response = await fetch(
-      `http://localhost:5000/api/jobs/apply`,
-        {
-          method: "POST",
-          body: formDataToSend,
-        }
-      );
+      const response = await fetch(`${apiUrl}/api/jobs/apply`, {
+        method: "POST",
+        body: formDataToSend,
+      });
 
       const result = await response.json();
       alert(result.message);

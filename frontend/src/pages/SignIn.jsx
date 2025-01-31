@@ -61,10 +61,7 @@ const SignIn = ({ setIsUserSignedIn }) => {
     setMessage("");
 
     try {
-      const response = await axios.post(
-        `http://localhost:5000/api/users/signin`,
-        formData
-      );
+      const response = await axios.post(`${apiUrl}/api/users/signin`, formData);
 
       const { token, message } = response.data;
 
