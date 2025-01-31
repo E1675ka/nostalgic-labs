@@ -7,6 +7,7 @@ const jobApplicationSchema = new mongoose.Schema({
         required: true
     },
 
+    
     lname: {
         type: String,
         required: true
