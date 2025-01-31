@@ -3,7 +3,7 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs/promises"; // Use fs.promises for async handling
-import pdfParse from "pdf-parse";
+import { PDFDocument } from "pdf-lib"; // Use pdf-lib for PDF parsing
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
 const router = express.Router();
@@ -44,10 +44,21 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
     const filePath = path.join(uploadsDir, resumeFile.filename);
 
     try {
-      // Read and extract text from PDF
+      // Read the PDF file into a buffer
       const pdfBuffer = await fs.readFile(filePath);
-      const pdfData = await pdfParse(pdfBuffer);
-      const pdfText = pdfData.text; // Extracted text
+
+      // Use pdf-lib to extract text from the PDF buffer
+      const pdfDoc = await PDFDocument.load(pdfBuffer);
+      const pages = pdfDoc.getPages();
+      let pdfText = "";
+
+      // Loop through all pages and extract text
+      for (const page of pages) {
+        const textContent = page.getTextContent();
+        textContent.forEach((item) => {
+          pdfText += item.str + " "; // Append text from each item
+        });
+      }
 
       // Construct the full URL for the resume
       const resumeUrl = `http://localhost:5000/api/jobs/uploads/${resumeFile.filename}`;
