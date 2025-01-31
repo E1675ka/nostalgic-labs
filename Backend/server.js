@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json()); // To parse incoming JSON requests
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend's URL if different
+    origin: "https://nostalgic-labs-kywv.vercel.app", // Replace with your frontend's URL if different
     methods: "GET,POST",
     credentials: true,
   })
