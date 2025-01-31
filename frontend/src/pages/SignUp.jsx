@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import herobg from "../assets/bgpattern4.jpg";
-import apiUrl from "../api";
+import apiUrl from "../api/api";
+
 const SignUp = ({ setIsUserSignedUp }) => {
   const [formData, setFormData] = useState({
     firstName: "",
