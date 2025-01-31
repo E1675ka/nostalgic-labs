@@ -18,7 +18,7 @@ app.use(
     methods: "GET,POST, PUT, DELETE",
     
     credentials: true,
-  })
+  })  
 );
 
 console.log("MONGO_URI:", process.env.MONGO_URI);
