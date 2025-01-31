@@ -143,7 +143,7 @@ const SignUp = ({ setIsUserSignedUp }) => {
           }`}
           disabled={loading}
         >
-          {loading ? "Signing In..." : "Sign In"}
+          {loading ? "Signing Up..." : "Sign Upchanged"}
         </button>
       </form>
 
