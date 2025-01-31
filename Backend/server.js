@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import userRoutes from "./routes/UserRoutes.js";
-import jobRoutes from "./routes/jobRoutes.js"; // Import job application route
+import jobRoutes from "./routes/jobRoutes.js"; 
 import connectDB from "./config/config.js";
 import cors from "cors";
 
@@ -11,14 +11,23 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(express.json()); // To parse incoming JSON requests
+app.use(express.json()); 
+const allowedOrigins = [
+  "https://nostalgic-labs-kywv.vercel.app",
+  "https://nostalgic-labs-kywv-71v4voalk-e1675kas-projects.vercel.app",
+];
 app.use(
   cors({
-    origin:"https://nostalgic-labs-kywv.vercel.app", // Replace with your frontend's URL if different
-    methods: "GET,POST, PUT, DELETE",
-    
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,POST,PUT,DELETE",
     credentials: true,
-  })  
+  })
 );
 
 console.log("MONGO_URI:", process.env.MONGO_URI);
@@ -28,7 +37,7 @@ connectDB();
 
 // Use the routes
 app.use("/api/users", userRoutes);
-app.use("/api/jobs", jobRoutes); // Add job application route
+app.use("/api/jobs", jobRoutes); 
 
 // Start the server
 const PORT = process.env.PORT || 5000;
