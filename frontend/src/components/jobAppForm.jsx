@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
-
+import apiUrl from "../api";
 const JobApplicationForm = () => {
   const [formData, setFormData] = useState({
     fname: "",
