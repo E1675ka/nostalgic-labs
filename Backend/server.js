@@ -16,8 +16,7 @@ app.use(
 // Middleware
 app.use(express.json()); 
 const allowedOrigins = [
-  "https://nostalgic-labs-kywv.vercel.app",
-  "https://nostalgic-labs-kywv-71v4voalk-e1675kas-projects.vercel.app",
+  "*",
 ];
 app.use(
   cors({
