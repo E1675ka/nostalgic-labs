@@ -15,8 +15,8 @@ const SignUp = ({ setIsUserSignedUp }) => {
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
-    const [loading, setLoading] = useState(false);
-  
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -79,10 +79,7 @@ const SignUp = ({ setIsUserSignedUp }) => {
     if (!validateForm()) return;
 
     try {
-      const response = await axios.post(
-        `${apiUrl}/api/users/signup`,
-        formData
-      );
+      const response = await axios.post(`${apiUrl}/api/users/signup`, formData);
 
       setMessage(response.data.message || "Sign-up successful!");
 
@@ -147,6 +144,7 @@ const SignUp = ({ setIsUserSignedUp }) => {
           disabled={loading}
         >
           {loading ? "Signing In..." : "Sign In"}
+        </button>
       </form>
 
       <div className="flex gap-2 my-2">
