@@ -77,7 +77,7 @@ const SignUp = ({ setIsUserSignedUp }) => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/api/users/signup`,
+        `http://localhost:5000/api/users/signup`,
         formData
       );
 

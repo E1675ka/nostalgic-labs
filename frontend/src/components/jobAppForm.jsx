@@ -55,7 +55,7 @@ const JobApplicationForm = () => {
 
     try {
       const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/jobs/apply`,
+      `http://localhost:5000/api/jobs/apply`,
         {
           method: "POST",
           body: formDataToSend,
