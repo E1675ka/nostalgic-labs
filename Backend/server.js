@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import userRoutes from "./routes/userRoutes.js";
+import userRoutes from "./routes/UserRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js"; // Import job application route
 import connectDB from "./config/config.js";
 import cors from "cors";
