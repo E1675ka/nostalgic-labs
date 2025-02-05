@@ -1,24 +1,23 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { fileURLToPath } from "url";
 import fs from "fs/promises";
 import pdfParse from "pdf-parse";
+import dotenv from "dotenv";
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
 
 dotenv.config();
-
 const router = express.Router();
 
-// Use project root instead of __dirname
+// ✅ Use process.cwd() to ensure uploads go to the project root
 const UPLOADS_DIR = path.join(process.cwd(), "uploads");
 
-// Ensure uploads directory exists before starting the server
+// Ensure uploads directory exists
 (async () => {
   try {
     await fs.mkdir(UPLOADS_DIR, { recursive: true });
+    console.log("Uploads directory:", UPLOADS_DIR);
   } catch (err) {
     console.error("Error creating uploads directory:", err);
   }
@@ -26,7 +25,7 @@ const UPLOADS_DIR = path.join(process.cwd(), "uploads");
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, UPLOADS_DIR), // ✅ Fixed absolute path
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR), // ✅ FIXED PATH
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 
@@ -48,8 +47,8 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
     if (!resumeFile)
       return res.status(400).json({ message: "Resume file is required." });
 
-    const filePath = path.join(UPLOADS_DIR, resumeFile.filename); // ✅ Fixed path
-    console.log("File saved at:", filePath); // Debugging output
+    const filePath = path.join(UPLOADS_DIR, resumeFile.filename);
+    console.log("📂 File saved at:", filePath); // Debugging
 
     try {
       const pdfBuffer = await fs.readFile(filePath);
@@ -75,24 +74,26 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
         extractedText: pdfText,
       });
     } catch (pdfError) {
-      console.error("Error processing PDF:", pdfError);
+      console.error("❌ Error processing PDF:", pdfError);
       return res.status(500).json({ message: "Error reading PDF file." });
     }
   } catch (error) {
-    console.error("Error submitting application:", error);
+    console.error("❌ Error submitting application:", error);
     res.status(500).json({ message: "Server error. Try again later." });
   }
 });
 
 router.get("/uploads/:filename", async (req, res) => {
   try {
-    const filePath = path.join(UPLOADS_DIR, req.params.filename); // ✅ Fixed path
+    const filePath = path.join(UPLOADS_DIR, req.params.filename);
+    console.log("📂 Serving file from:", filePath); // Debugging
     await fs.access(filePath);
     res.sendFile(filePath);
   } catch (error) {
-    console.error("File not found:", error);
+    console.error("❌ File not found:", error);
     res.status(404).json({ message: "File not found" });
   }
 });
 
 export default router;
+s
