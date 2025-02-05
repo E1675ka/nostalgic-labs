@@ -6,10 +6,10 @@ import fs from "fs/promises";
 import { PDFDocument } from "pdf-lib"; // Correct way to use pdf-lib
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
-import apiUrl from "../../frontend/src/api/api.js";
+import dotenv from "dotenv";
 
 const router = express.Router();
-
+dotenv.config();
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
