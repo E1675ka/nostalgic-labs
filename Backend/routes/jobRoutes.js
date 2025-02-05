@@ -97,4 +97,3 @@ router.get("/uploads/:filename", async (req, res) => {
 });
 
 export default router;
-s
