@@ -2,7 +2,8 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import fs from "fs/promises";
-import pdfParse from "pdf-parse";
+import pdfParse from "pdf-parse/lib/pdf-parse.js"; 
+
 import dotenv from "dotenv";
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
