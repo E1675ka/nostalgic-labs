@@ -46,7 +46,7 @@ const JobApplicationForm = () => {
     });
 
     try {
-      const response = await fetch(`${apiUrl}/api/jobs/applications`, {
+      const response = await fetch(`${apiUrl}/api/jobs/apply`, {
         method: "POST",
         body: formDataToSend,
       });
