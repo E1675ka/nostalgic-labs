@@ -3,23 +3,22 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs/promises";
-import pdfParse from "pdf-parse"; // ✅ Use pdf-parse instead of pdf-lib
+import pdfParse from "pdf-parse";
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config(); // ✅ Load environment variables
+dotenv.config();
 
 const router = express.Router();
 
-// Fix __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Use project root instead of __dirname
+const UPLOADS_DIR = path.join(process.cwd(), "uploads");
 
 // Ensure uploads directory exists before starting the server
 (async () => {
   try {
-    await fs.mkdir(path.join(__dirname, "../uploads"), { recursive: true });
+    await fs.mkdir(UPLOADS_DIR, { recursive: true });
   } catch (err) {
     console.error("Error creating uploads directory:", err);
   }
@@ -27,7 +26,7 @@ const __dirname = path.dirname(__filename);
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, path.join(__dirname, "../uploads")),
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR), // ✅ Fixed absolute path
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 
@@ -39,9 +38,8 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-const apiUrl = process.env.API_URL; // ✅ Use environment variable
+const apiUrl = process.env.API_URL;
 
-// 🚀 **POST: Submit job application & Extract PDF Content**
 router.post("/apply", upload.single("resume"), async (req, res) => {
   try {
     const { fname, lname, email, coverLetter } = req.body;
@@ -50,16 +48,14 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
     if (!resumeFile)
       return res.status(400).json({ message: "Resume file is required." });
 
-    const filePath = path.join(__dirname, "../uploads", resumeFile.filename);
+    const filePath = path.join(UPLOADS_DIR, resumeFile.filename); // ✅ Fixed path
+    console.log("File saved at:", filePath); // Debugging output
 
     try {
       const pdfBuffer = await fs.readFile(filePath);
-
-      // ✅ Use pdf-parse to extract text
       const pdfData = await pdfParse(pdfBuffer);
       const pdfText = pdfData.text;
 
-      // Construct the resume URL dynamically
       const resumeUrl = `${apiUrl}/api/jobs/uploads/${resumeFile.filename}`;
 
       const newApplication = new Application({
@@ -88,37 +84,14 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
   }
 });
 
-// 🚀 **GET: Retrieve and serve PDFs**
 router.get("/uploads/:filename", async (req, res) => {
   try {
-    const filePath = path.join(__dirname, "../uploads", req.params.filename);
+    const filePath = path.join(UPLOADS_DIR, req.params.filename); // ✅ Fixed path
     await fs.access(filePath);
     res.sendFile(filePath);
   } catch (error) {
     console.error("File not found:", error);
     res.status(404).json({ message: "File not found" });
-  }
-});
-
-// 🚀 **GET: View Extracted PDF Text in Database**
-router.get("/view-text/:id", async (req, res) => {
-  try {
-    const applicationId = req.params.id;
-
-    if (!mongoose.Types.ObjectId.isValid(applicationId)) {
-      return res.status(400).json({ message: "Invalid application ID." });
-    }
-
-    const application = await Application.findById(applicationId);
-
-    if (!application) {
-      return res.status(404).json({ message: "Application not found." });
-    }
-
-    res.json({ extractedText: application.resumeText });
-  } catch (error) {
-    console.error("Error fetching extracted text:", error);
-    res.status(500).json({ message: "Server error." });
   }
 });
 
