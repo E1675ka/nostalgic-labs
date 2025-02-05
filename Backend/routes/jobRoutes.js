@@ -6,6 +6,7 @@ import fs from "fs/promises";
 import { PDFDocument } from "pdf-lib"; // Correct way to use pdf-lib
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
+import apiUrl from "../../frontend/src/api/api.js";
 
 const router = express.Router();
 
@@ -58,7 +59,7 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
       }
 
       // Construct the resume URL dynamically
-      const resumeUrl = `/api/jobs/uploads/${resumeFile.filename}`;
+      const resumeUrl = `${apiUrl}/api/jobs/uploads/${resumeFile.filename}`;
 
       const newApplication = new Application({
         fname,
