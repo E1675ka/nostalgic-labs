@@ -3,13 +3,15 @@ import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs/promises";
-import { PDFDocument } from "pdf-lib"; // Correct way to use pdf-lib
+import pdfParse from "pdf-parse"; // ✅ Use pdf-parse instead of pdf-lib
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+dotenv.config(); // ✅ Load environment variables
+
 const router = express.Router();
-dotenv.config();
+
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +39,8 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
+const apiUrl = process.env.API_URL; // ✅ Use environment variable
+
 // 🚀 **POST: Submit job application & Extract PDF Content**
 router.post("/apply", upload.single("resume"), async (req, res) => {
   try {
@@ -50,13 +54,10 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
 
     try {
       const pdfBuffer = await fs.readFile(filePath);
-      const pdfDoc = await PDFDocument.load(pdfBuffer);
-      let pdfText = "";
 
-      for (const page of pdfDoc.getPages()) {
-        const text = await page.getTextContent(); // ❌ This does not exist in pdf-lib
-        pdfText += text.items.map((item) => item.str).join(" ") + " ";
-      }
+      // ✅ Use pdf-parse to extract text
+      const pdfData = await pdfParse(pdfBuffer);
+      const pdfText = pdfData.text;
 
       // Construct the resume URL dynamically
       const resumeUrl = `${apiUrl}/api/jobs/uploads/${resumeFile.filename}`;
