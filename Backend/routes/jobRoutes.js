@@ -2,10 +2,11 @@ import express from "express";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
-import fs from "fs/promises"; // Use fs.promises for async handling
-import { PDFDocument } from "pdf-lib"; // Use pdf-lib for PDF parsing
+import fs from "fs/promises";
+import { PDFDocument } from "pdf-lib"; // Correct way to use pdf-lib
 import Application from "../models/jobApplicationModel.js";
 import mongoose from "mongoose";
+
 const router = express.Router();
 
 // Fix __dirname in ES modules
@@ -13,16 +14,20 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Ensure uploads directory exists before starting the server
-const uploadsDir = path.join(__dirname, "../uploads/");
-await fs.mkdir(uploadsDir, { recursive: true });
+(async () => {
+  try {
+    await fs.mkdir(path.join(__dirname, "../uploads"), { recursive: true });
+  } catch (err) {
+    console.error("Error creating uploads directory:", err);
+  }
+})();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadsDir),
+  destination: (req, file, cb) => cb(null, path.join(__dirname, "../uploads")),
   filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 
-// File filter to allow only PDFs
 const fileFilter = (req, file, cb) => {
   file.mimetype === "application/pdf"
     ? cb(null, true)
@@ -40,30 +45,21 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
     if (!resumeFile)
       return res.status(400).json({ message: "Resume file is required." });
 
-    // Get PDF file path
-    const filePath = path.join(uploadsDir, resumeFile.filename);
+    const filePath = path.join(__dirname, "../uploads", resumeFile.filename);
 
     try {
-      // Read the PDF file into a buffer
       const pdfBuffer = await fs.readFile(filePath);
-
-      // Use pdf-lib to extract text from the PDF buffer
       const pdfDoc = await PDFDocument.load(pdfBuffer);
-      const pages = pdfDoc.getPages();
       let pdfText = "";
 
-      // Loop through all pages and extract text
-      for (const page of pages) {
-        const textContent = page.getTextContent();
-        textContent.forEach((item) => {
-          pdfText += item.str + " "; // Append text from each item
-        });
+      for (const page of pdfDoc.getPages()) {
+        const text = await page.getTextContent(); // ❌ This does not exist in pdf-lib
+        pdfText += text.items.map((item) => item.str).join(" ") + " ";
       }
 
-      // Construct the full URL for the resume
-      const resumeUrl = `${apiUrl}/api/jobs/uploads/${resumeFile.filename}`;
+      // Construct the resume URL dynamically
+      const resumeUrl = `/api/jobs/uploads/${resumeFile.filename}`;
 
-      // Save application with extracted PDF text
       const newApplication = new Application({
         fname,
         lname,
@@ -93,8 +89,8 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
 // 🚀 **GET: Retrieve and serve PDFs**
 router.get("/uploads/:filename", async (req, res) => {
   try {
-    const filePath = path.join(uploadsDir, req.params.filename);
-    await fs.access(filePath); // Ensure the file exists before sending
+    const filePath = path.join(__dirname, "../uploads", req.params.filename);
+    await fs.access(filePath);
     res.sendFile(filePath);
   } catch (error) {
     console.error("File not found:", error);
@@ -107,10 +103,6 @@ router.get("/view-text/:id", async (req, res) => {
   try {
     const applicationId = req.params.id;
 
-    // Log the received ID to verify it
-    console.log("Received ID:", applicationId);
-
-    // Validate the ObjectId
     if (!mongoose.Types.ObjectId.isValid(applicationId)) {
       return res.status(400).json({ message: "Invalid application ID." });
     }
