@@ -61,7 +61,7 @@ router.post("/apply", upload.single("resume"), async (req, res) => {
       }
 
       // Construct the full URL for the resume
-      const resumeUrl = `http://localhost:5000/api/jobs/uploads/${resumeFile.filename}`;
+      const resumeUrl = `${apiUrl}/api/jobs/uploads/${resumeFile.filename}`;
 
       // Save application with extracted PDF text
       const newApplication = new Application({
