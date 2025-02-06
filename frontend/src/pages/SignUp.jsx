@@ -77,7 +77,8 @@ const SignUp = ({ setIsUserSignedUp }) => {
     e.preventDefault();
 
     if (!validateForm()) return;
-
+    setLoading(true);
+    setMessage("");
     try {
       const response = await axios.post(`${apiUrl}/api/users/signup`, formData);
 
