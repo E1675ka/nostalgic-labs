@@ -167,7 +167,7 @@ const JobApplicationForm = () => {
         </button>
       </form>
 
-      {submittedData && (
+      {/* {submittedData && (
         <div className="mt-8 p-4 border rounded-lg bg-gray-100 w-full max-w-xl">
           <h3 className="text-2xl font-semibold">Submitted Information</h3>
           <p>
@@ -195,7 +195,7 @@ const JobApplicationForm = () => {
             <Viewer fileUrl={pdfUrl} />
           </Worker>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
