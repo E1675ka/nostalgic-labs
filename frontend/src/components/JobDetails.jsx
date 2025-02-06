@@ -64,7 +64,7 @@ const JobDetailsPage = () => {
       </div>
       <JobApplicationForm />
 
-      <ViewApplications />
+     
     </div>
   );
 };
