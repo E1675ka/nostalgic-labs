@@ -23,7 +23,7 @@ const App = () => {
     // Check authentication status
     const authToken = localStorage.getItem("authToken");
     setIsUserSignedIn(!!authToken); // Set to true if token exists, false otherwise
-    console.log("Auth Token:", authToken, "Is User Signed In:", !!authToken);
+    // console.log("Auth Token:", authToken, "Is User Signed In:", !!authToken);
 
     // Handle footer visibility on scroll
     const handleScroll = () => {
