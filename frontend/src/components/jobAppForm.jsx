@@ -14,10 +14,12 @@ const JobApplicationForm = () => {
   const [fileName, setFileName] = useState("");
   const [submittedData, setSubmittedData] = useState(null);
   const [pdfUrl, setPdfUrl] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-
+ 
     if (type === "file" && files.length > 0) {
       setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
       setFileName(files[0].name);
@@ -28,6 +30,8 @@ const JobApplicationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+      setLoading(true);
+    setMessage("");
 
     if (
       !formData.fname ||
@@ -54,6 +58,7 @@ const JobApplicationForm = () => {
       alert(result.message);
 
       setSubmittedData({ ...formData, resume: fileName });
+
       setPdfUrl(URL.createObjectURL(formData.resume));
       setFormData({
         fname: "",
@@ -66,6 +71,8 @@ const JobApplicationForm = () => {
     } catch (error) {
       console.error("Submission error:", error);
       alert("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -161,9 +168,9 @@ const JobApplicationForm = () => {
 
         <button
           type="submit"
-          className="w-full py-3 bg-purple-600 text-white font-semibold rounded-md"
-        >
-          Submit Application
+          className={`w-full py-3 bg-purple-600 text-white font-semibold rounded-md ${loading ? "bg-purple-200 text-black cursor-not-allowed" :"bg-purple-600"}`} 
+          disabled={loading} >
+          {loading ? "Submitting Application..." : "Submit Application"}
         </button>
       </form>
 
